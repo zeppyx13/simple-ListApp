@@ -1,11 +1,11 @@
 package com.example.simplelistapp
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class ListAdapter(private val list: List<ListItem>) :
@@ -31,11 +31,11 @@ class ListAdapter(private val list: List<ListItem>) :
         holder.imgItem.setImageResource(item.image)
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(
-                holder.itemView.context,
-                "Kamu memilih: ${item.name}",
-                Toast.LENGTH_SHORT
-            ).show()
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("name", item.name)
+            intent.putExtra("image", item.image)
+            intent.putExtra("desc", item.desc)
+            holder.itemView.context.startActivity(intent)
         }
     }
 }
